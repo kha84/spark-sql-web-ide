@@ -3,6 +3,8 @@
 A very simple streamlit web UI which allows you to run Spark SQL against parquet files stored in MinIO S3 bucket.
 You can define your own aliases for the files you need. 
 
+If you need something more useful, consider to look at HUE (https://github.com/cloudera/hue).
+
 # Installation
 
 

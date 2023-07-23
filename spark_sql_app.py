@@ -1,12 +1,7 @@
 import streamlit as st
 import boto3
+from spark_sql_app_config import *
 from pyspark.sql import SparkSession
-
-# Configure S3 MinIO access
-minio_access_key = "g3sB5A0PkrpDJ1iuzxhw"
-minio_secret_key = "FcodVGJaEhZdX88zyB9safLSdIMc1vNcCUwyAqSM"
-minio_bucket_name = "test"
-minio_endpoint = "http://localhost:9000"  # Replace with your MinIO server endpoint
 
 
 # Initialize PySpark
@@ -36,6 +31,7 @@ def get_execution_plan(query):
         st.error(f"Error executing the query: {e}")
 
 def main():
+    st.set_page_config(layout="wide")
     st.title("PySpark SQL Query Runner")
     
     # Initialize query variable
@@ -53,7 +49,8 @@ def main():
     #execute_query(query)
     
     # Show Parquet files in S3 MinIO bucket in the sidebar
-    st.sidebar.title("Parquet Files in S3 MinIO Bucket")
+    st.sidebar.title(f"Parquet Files in S3 MinIO '{minio_bucket_name}' bucket")
+    st.sidebar.text(f"{minio_endpoint}")
     
     # Initialize S3 MinIO client
     s3_client = boto3.client("s3",

@@ -42,7 +42,7 @@ Open MinIO web console (minioadmin/minioadmin) and:
 * put some parquet files in there
 * create API key for our application
 
-Update all the details to spark_sql_app.py
+Update all the details to spark_sql_app_config.py
 
 
 4. Run the app 

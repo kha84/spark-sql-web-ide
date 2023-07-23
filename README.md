@@ -136,3 +136,12 @@ And finally, let's run the app itself:
 ```
 streamlit run spark_sql_app.py --server.port 1001
 ```
+
+If you ever shutdown this test container and want to start it up, terminal back to it and run everything again, use these commands:
+```
+docker start test
+docker exec --user root -it test bash
+cd spark-sql-web-ide/
+./minio server ./data --console-address 0.0.0.0:1000 &
+streamlit run spark_sql_app.py --server.port 1001
+```

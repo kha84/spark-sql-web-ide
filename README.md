@@ -12,7 +12,7 @@ If you need something more useful, consider to look at HUE (https://github.com/c
 1. Install all the needed requirements
 
 ```
-pip install pyspark streamlit boto3
+pip install pyspark streamlit boto3 pandas==1.*
 ```
 
 2. Download jars we need for MinIO and place them together to all pyspark jars. Have a look on this URL to see more details:
@@ -145,3 +145,8 @@ cd spark-sql-web-ide/
 ./minio server ./data --console-address 0.0.0.0:1000 &
 streamlit run spark_sql_app.py --server.port 1001
 ```
+
+# Known issues and workarounds
+
+When the parquet file is having datetime64 type, Spark is struggling to convert it to Pandas dataframe (in order to display it with streamlit) and hits this error: `Casting to unit-less dtype 'datetime64' is not supported`. It looks like it's some kind of bug introduced in Pandas 2 - thus the requirement to install pandas==1.*
+A prorper solution would be to introduce a special handling into *execute_sql_query* function, to convert all such yet-unsupported datatypes manually with using Spark means, before calling `toPandas()`
